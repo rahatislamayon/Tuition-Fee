@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Tuition Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        .results {
+            margin-top: 25px;
+            display: none;
+        }
+
+        .installment {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #e2e8f0;
+        }
+
+        .installment:last-child {
+            margin-bottom: 0;
+        }
+
+        .installment-number {
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        .installment-amount {
+            color: #2d3748;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .total {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #e2e8f0;
+            font-weight: 700;
+            color: #4a5568;
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 15px;
+            color: #718096;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tuition Fee Calculator</h1>
+        
+        <div class="input-group">
+            <label for="totalFee">Enter Total Tuition Amount</label>
+            <input type="number" id="totalFee" placeholder="Enter total amount">
+        </div>
+        
+        <button onclick="calculateInstallments()">Calculate Installments</button>
+        
+        <div class="results" id="results">
+            <div class="installment">
+                <span class="installment-number">1st Installment (40%)</span>
+                <span class="installment-amount" id="first">0</span>
+            </div>
+            <div class="installment">
+                <span class="installment-number">2nd Installment (30%)</span>
+                <span class="installment-amount" id="second">0</span>
+            </div>
+            <div class="installment">
+                <span class="installment-number">3rd Installment (30%)</span>
+                <span class="installment-amount" id="third">0</span>
+            </div>
+            <div class="total">
+                Total Amount: <span id="totalAmount">0</span>
+            </div>
+        </div>
+        
+        <div class="note">Payment plan: 40% + 30% + 30%</div>
+    </div>
+
+    <script>
+        function calculateInstallments() {
+            const totalFee = parseFloat(document.getElementById('totalFee').value);
+            const results = document.getElementById('results');
+            
+            if (!totalFee || totalFee <= 0) {
+                alert('Please enter a valid tuition amount');
+                return;
+            }
+
+            const first = totalFee * 0.4;
+            const second = totalFee * 0.3;
+            const third = totalFee * 0.3;
+
+            document.getElementById('first').textContent = first.toFixed(2);
+            document.getElementById('second').textContent = second.toFixed(2);
+            document.getElementById('third').textContent = third.toFixed(2);
+            document.getElementById('totalAmount').textContent = totalFee.toFixed(2);
+            
+            results.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
